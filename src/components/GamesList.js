@@ -4,6 +4,7 @@ import Pagination from "./Pagination";
 import Search from "./Search";
 import TableHeader from "./TableHeader";
 import TableBody from "./TableBody";
+import gameData from "../data/games_data";
 
 GamesList.defaultProps = {
   enablePagination: false
@@ -28,7 +29,13 @@ export default function GamesList({ enablePagination }) {
         setSearchList(data);
         setRowsToDisplay(data);
       })
-      .catch(err => console.error(err));
+      .catch(err => {
+        console.error(err);
+        sortYears(gameData);
+        setGames(gameData);
+        setSearchList(gameData);
+        setRowsToDisplay(gameData);
+      });
   }, []);
 
   let handlePageChange = rowsToDisplay => {
